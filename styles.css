@@ -1,0 +1,160 @@
+/* Fondo y fuente */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #e0f7fa, #e1f5fe);
+  color: #333;
+}
+
+/* Encabezado */
+header {
+  background: linear-gradient(90deg, #007ac1, #00bcd4);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 122, 193, 0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+/* Contenedor principal */
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* Productos */
+.product-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 calc(33.333% - 1rem);
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: #e3f2fd;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  color: #222;
+  margin: 0.5rem 0;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card button {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #008ba3;
+}
+
+/* Carrito */
+.cart-container {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.cart-list {
+  list-style: none;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: #fdfdfd;
+}
+
+.cart-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-list li:last-child {
+  border-bottom: none;
+}
+
+#cart-total-container {
+  font-weight: bold;
+  text-align: right;
+  margin-top: 1rem;
+}
+
+/* Botón Pagar */
+.pay-button {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.pay-button:hover {
+  background: linear-gradient(135deg, #388e3c, #4caf50);
+  transform: translateY(-2px);
+}
+
+/* Caja de PayPhone */
+#pp-button {
+  margin-top: 1.5rem;
+  display: none;
+  text-align: center;
+}
+
+.payment-response {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  display: none;
+  text-align: center;
+  font-weight: bold;
+}

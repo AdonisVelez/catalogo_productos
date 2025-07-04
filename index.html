@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Productos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.payphonetodoesposible.com/box/v1.1/payphone-payment-box.css">
+  <style>
+    .pay-button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .pay-button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Catálogo de Productos</h1>
+  </header>
+
+  <main>
+    <div id="product-list" class="product-container"></div>
+
+    <div class="cart-container">
+      <h2>🛒 Carrito</h2>
+      <ul id="cart" class="cart-list"></ul>
+
+      <div id="cart-total-container">
+        <p>Total: $<span id="cart-total">0.00</span></p>
+      </div>
+
+      <!-- Botón para iniciar el pago manual -->
+      <button id="pay-button" class="pay-button">Pagar Todo</button>
+
+      <!-- Contenedor para la cajita de pago PayPhone -->
+      <div id="pp-button"></div>
+      <div id="payment-response" class="payment-response"></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.payphonetodoesposible.com/box/v1.1/payphone-payment-box.js"></script>
+  <script>
+    // Escuchar clic en botón de "Pagar Todo"
+    document.addEventListener('DOMContentLoaded', () => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      document.getElementById('pay-button').addEventListener('click', () => {
+        const items = document.querySelectorAll('#cart li');
+        if (items.length === 0) {
+          const msg = document.getElementById('payment-response');
+          msg.textContent = 'El carrito está vacío. Agrega productos antes de pagar.';
+          msg.style.display = 'block';
+          msg.className = 'payment-response info';
+          setTimeout(() => {
+            msg.style.display = 'none';
+          }, 4000);
+          return;
+        }
+
+        let total = 0;
+        items.forEach(item => {
+          const priceText = item.textContent.split('$')[1];
+          total += parseFloat(priceText);
+        });
+
+        if (typeof initPaymentBox === 'function') {
+          initPaymentBox(total);
+        } else {
+          console.error('initPaymentBox no está disponible.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

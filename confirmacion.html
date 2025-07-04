@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmación de Pago</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .confirmation-container {
+      background: white;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .return-button {
+      display: inline-block;
+      background: #008cba;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 1.5rem;
+    }
+    .transaction-details {
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    .status-approved {
+      color: #28a745;
+      font-weight: bold;
+    }
+    .params-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .params-table th, .params-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .params-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .params-table th {
+      background-color: #008cba;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>¡Pago Confirmado!</h1>
+  </header>
+  <main>
+    <div class="confirmation-container">
+      <h2>Gracias por tu compra</h2>
+      <p>Tu transacción ha sido procesada exitosamente.</p>
+      
+      <div class="transaction-details">
+        <h3>Detalles de la transacción:</h3>
+        <p><strong>Estado del Pago:</strong> <span id="payment-status" class="status-approved">Aprobado</span></p>
+        <p><strong>ID de Transacción Cliente:</strong> <span id="client-transaction-id">Cargando...</span></p>
+        <p><strong>ID de Transacción PayPhone:</strong> <span id="transaction-id">Cargando...</span></p>
+      </div>
+      
+      <a href="index.html" class="return-button">Volver a la tienda</a>
+    </div>
+  </main>
+  <script>
+    // Extraer todos los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Obtener los parámetros específicos que esperamos
+    document.getElementById('client-transaction-id').textContent = 
+        urlParams.get('clientTransactionId') || 'No disponible';
+    
+    document.getElementById('transaction-id').textContent = 
+        urlParams.get('transactionId') || urlParams.get('id') || 'No disponible';
+    
+    // Verificar que el ID de transacción coincida con el guardado
+    const clientId = urlParams.get('clientTransactionId');
+    const savedId = localStorage.getItem('lastTransactionId');
+
+    if (clientId && savedId && clientId === savedId) {
+      console.log("Transacción verificada: IDs coinciden");
+    } else {
+      console.log("Advertencia: El ID de transacción no coincide con el guardado previamente");
+    }
+    
+    // Procesar estado del pago
+    const statusElement = document.getElementById('payment-status');
+    const status = urlParams.get('transactionStatus') || 'Approved'; // Por defecto "Approved" para la página de confirmación
+    statusElement.textContent = status;
+    
+    if (status === 'Approved' || status === 'Completado' || status === 'Success') {
+      statusElement.className = 'status-approved';
+    } else {
+      statusElement.className = '';
+      statusElement.style.color = 'orange';
+    }
+  </script>
+</body>
+</html>
