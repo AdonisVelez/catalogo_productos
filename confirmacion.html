@@ -91,7 +91,7 @@
       console.log("Advertencia: El ID de transacción no coincide con el guardado previamente");
     }
     
-    // Procesar estado del pago
+    // Procesar estado del pago ..
     const statusElement = document.getElementById('payment-status');
     const status = urlParams.get('transactionStatus') || 'Approved'; // Por defecto "Approved" para la página de confirmación
     statusElement.textContent = status;
