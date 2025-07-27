@@ -37,7 +37,7 @@ pipeline {
                     docker stop tienda-online || true
                     docker rm tienda-online || true
 
-                    docker run -d --name tienda-online -p 3000:3000 tienda-online:latest
+                    docker run -d --name tienda-online -p 3010:3000 tienda-online:latest
                 '''
             }
         }
