@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "Node18" // Asegúrate de tener esta instalación en Jenkins
+        nodejs "Node24" // Asegúrate de tener esta instalación en Jenkins
         dockerTool 'Dockertool' // Configura esta herramienta en Jenkins
     }
 
