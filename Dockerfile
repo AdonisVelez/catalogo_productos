@@ -1,11 +1,21 @@
-# Usa una imagen base de Nginx
-FROM nginx:alpine
+# Dockerfile
+FROM node:16
 
-# Elimina el contenido por defecto de Nginx
-RUN rm -rf /usr/share/nginx/html/*
+# Crear directorio de la aplicación
+WORKDIR /usr/src/app
 
-# Copia todo el contenido del proyecto (HTML, CSS, JS)
-COPY . /usr/share/nginx/html
+# Copiar archivos al contenedor
+COPY package*.json ./
+COPY index.js .
 
-# Expone el puerto 80
-EXPOSE 80
+# Instalar dependencias
+RUN npm install
+
+# Copiar el resto de los archivos
+COPY users.json .
+
+# Exponer el puerto de la aplicación
+EXPOSE 3000
+
+# Comando para iniciar la aplicación
+CMD ["node", "index.js"]
